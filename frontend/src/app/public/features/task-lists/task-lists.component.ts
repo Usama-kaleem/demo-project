@@ -81,7 +81,7 @@ export class TaskListsComponent implements OnInit{
 
   renameTaskList(taskListId: number) {
     const dialogRef = this.dialog.open(RenameTaskListDialogComponent, {
-      data: { id: taskListId}
+      data: { id: taskListId },
     });
 
     dialogRef.afterClosed().subscribe(result => {
