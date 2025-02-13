@@ -34,6 +34,7 @@ export class TaskListsComponent implements OnInit{
   ) 
   {
     this.loadTaskList()
+    console.log('TaskListsComponent.constructor');
     
   }
 
@@ -59,6 +60,7 @@ export class TaskListsComponent implements OnInit{
         this.message = `${data.name} has been assigned to you by ${this.authService.getSession().user.name}.`;
       }
     });
+    console.log('TaskListsComponent.ngOnInit');
     //this.webSocketService.disconnect();
   }
 
