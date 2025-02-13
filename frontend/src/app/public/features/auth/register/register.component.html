@@ -1,0 +1,58 @@
+<div class="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 w-96">
+    <h1 mat-dialog-title class="text-xl font-semibold mb-4 text-center">Register Now</h1>
+<mat-dialog-content>
+  <form (submit)="submit()" class="space-y-4" [formGroup]="form">
+    <!-- Name Input Field -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Name</mat-label>
+      <input matInput formControlName="name" type="text" id="name" name="name" required placeholder="Enter your name">
+      <mat-error *ngIf="form.get('name')?.touched && form.get('name')?.errors?.['required']">
+        Name is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Email Input Field -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" type="email" id="email" name="email" required placeholder="Enter your email">
+      <mat-error *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['required']">
+        Email is required
+      </mat-error>
+      <mat-error *ngIf="form.get('email')?.touched && form.get('email')?.errors?.['email']">
+        Please enter a valid email
+      </mat-error>
+      
+    </mat-form-field>
+
+    <!-- Password Input Field -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Password</mat-label>
+      <input matInput formControlName="password" type="password" id="password" name="password" required placeholder="Enter your password">
+      <mat-error *ngIf="form.get('password')?.touched && form.get('password')?.errors?.['required']">
+        Password is required
+      </mat-error>
+      <mat-error *ngIf="form.get('password')?.touched && form.get('password')?.errors?.['minlength']">
+        Password must be at least 6 characters
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Custom Error Message (if any) -->
+    <div *ngIf="errorMessage" class="text-red-500">
+      {{ errorMessage }}
+    </div>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end mt-6">
+      <button mat-raised-button class="ml-2" type="submit" [disabled]="form.invalid" >
+        Register
+      </button>
+    </div>
+
+    <!-- Login Link -->
+    <div class="flex justify-center my-3 text-sm">
+      Already have an account?
+      <a routerLink="/auth/login" class="text-[#8a2ce2] hover:text-[#8a2ce2]ml-1">Login</a>
+    </div>
+  </form>
+</mat-dialog-content>
+</div>

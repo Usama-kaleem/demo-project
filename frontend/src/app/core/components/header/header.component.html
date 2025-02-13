@@ -1,0 +1,19 @@
+<header>
+    <div class="w-[50%] flex justify-between items-center p-4 mx-auto">
+        <!-- Left side: Task List App -->
+        <h1 class="text-2xl"><b>Task List App</b></h1>
+    
+        <!-- Right side: Logout button -->
+        @if(authService.session){
+            <button (click)="authService.logout()" class="bg-[#8a2be2] text-white px-4 py-2 rounded-md hover:bg-[#892be293] translate-all duration-200">
+                Logout
+            </button>
+        }
+        @if(!authService.session){
+            <button routerLink="/auth/login" class="bg-[#8a2be2] text-white px-4 py-2 rounded-md hover:bg-[#892be2e4] translate-all duration-200">
+                Login
+            </button>
+        }
+    </div>
+</header>
+<div class="w-[50%] border-t-2 border-black opacity-30 mx-auto "></div>

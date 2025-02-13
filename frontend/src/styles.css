@@ -1,0 +1,27 @@
+/* filepath: /Users/usama/Desktop/Folder/demoProject/frontend/src/styles.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.custom-button {
+    background-color: #FF5722;  /* Example: Orange */
+    color: white;
+    border-radius: 8px;
+  }
+  
+  .custom-button:hover {
+    background-color: #E64A19; /* Darker shade for hover */
+  }
+  
+html, body { height: 100%; }
+body { 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+  background-image: linear-gradient(to top, #8a2ce24b 0%, #ffffff 100%);
+}
+/* Set the custom primary color for Angular Material */
+
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

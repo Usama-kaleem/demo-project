@@ -1,0 +1,24 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+
+// Define a custom primary color palette
+$custom-primary: mat-palette($mat-deep-purple, 500, 300, 700);
+
+// Define your custom accent color
+$custom-accent: mat-palette($mat-amber, A200, A100, A400);
+
+// Define your custom warn color
+$custom-warn: mat-palette($mat-red);
+
+// Create the theme object
+$custom-theme: mat-light-theme((
+  color: (
+    primary: $custom-primary,
+    accent: $custom-accent,
+    warn: $custom-warn,
+  ),
+));
+
+// Include the Angular Material theme styles
+@include angular-material-theme($custom-theme);

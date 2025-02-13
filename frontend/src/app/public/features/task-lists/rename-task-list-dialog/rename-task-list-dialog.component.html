@@ -1,0 +1,27 @@
+<h1 mat-dialog-title class="text-xl font-semibold mb-4 text-center">Rename Task List</h1>
+<mat-dialog-content>
+  <form (submit)="submit()" class="space-y-4" [formGroup]="form">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Task List Name</mat-label>
+      <input matInput formControlName="name" type="text" required placeholder="Enter new task list name">
+      <mat-error *ngIf="form.get('name')?.touched && form.get('name')?.errors?.['required']">
+        Task List Name is required
+      </mat-error>
+      <mat-error *ngIf="form.get('name')?.hasError('taskListNameTaken')">
+        Task List Name is already taken
+      </mat-error>
+    </mat-form-field>
+
+    <div *ngIf="errorMessage" class="text-red-500">
+      {{ errorMessage }}
+    </div>
+  </form>
+</mat-dialog-content>
+<div mat-dialog-actions class="flex justify-end mt-4">
+  <button mat-button (click)="close()" class=" bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded">
+    Cancel
+  </button>
+  <button mat-button (click)="submit()" [disabled]="form.invalid" class="hover:bg-gray-300 hover:text-white bg-blue-700 text-white font-semibold py-2 px-4 rounded">
+    Rename
+  </button>
+</div>

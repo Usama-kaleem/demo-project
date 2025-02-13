@@ -1,0 +1,25 @@
+<div>
+    <form (submit)="submit()" class="card " [formGroup]="form" >
+        <h2 class="text-center font-bold text-xl mt-2 mb-5">
+            Login To TaskList Application
+        </h2>
+        <div>
+            <label for="email">Email</label>
+            <input formControlName="email" type="email" id="email" name="email" required placeholder="Enter your email">
+        </div>
+    
+        <div>
+            <label for="password">Password</label>
+            <input formControlName="password" type="password" id="password" name="password" required placeholder="Enter your password">
+        </div>
+    
+        <div class="flex justify-end">
+            <button type="submit">Login</button>
+        </div>
+    
+        <div class="flex justify-center my-3">
+            Don't have an account? 
+            <a class="text-[#8a2ce2]" routerLink="/auth/register"> Register</a>
+        </div>
+    </form>
+</div>

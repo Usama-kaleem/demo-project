@@ -1,0 +1,53 @@
+<app-header > </app-header>
+@if(message){
+  <div class="grid place-items-center py-3">
+    <div class="border-2 border-[#8a2be2] bg-violet-50 rounded-md w-[300px] text-center py-3">
+      {{ message }}
+    </div>
+    {{loadTaskList()}}
+  </div>
+}
+
+@if(authService.session){
+  <div>
+    <h1 style="text-align: center; font-size: 54px;">Task List </h1>
+    <div style="display: flex; justify-content: center; align-items: center;">
+        <button mat-raised-button (click)="showPopup()"style="background-color:blueviolet; color: aliceblue; padding: 10px; border: none; border-radius: 8px; font-size: 16px; transition: transform 0.3s ease;" class="hover:bg-violet-400 hover:scale-105 transition-colors duration-300">
+           Add New Task List
+        </button>
+        <button mat-raised-button (click)="showAddMemberDialog()"  style="margin-left: 10px; background-color:#8a2be2; color: aliceblue; padding: 10px; border: none; border-radius: 8px; font-size: 16px; transition: transform 0.3s ease;" class="hover:bg-violet-400 hover:scale-105 transition-colors duration-300">
+            Add New Member to System
+        </button>
+    </div>
+    @for (list of taskList; track list.id) {
+        <div class="grid place-items-center my-5">
+            <div class="bg-white rounded-lg shadow-2xl overflow-hidden w-1/4 transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-3xl">
+                <div class="flex flex-wrap justify-between items-center">
+                    <!-- Task List Name -->
+                    <div class="p-6 w-full sm:w-auto">
+                      <a (click)="openTaskList(list.name, list.id)"  class="text-center text-xl font-semibold text-gray-800">
+                        {{ list.name }}
+                      </a>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex items-center justify-center">
+                      <button (click)="deleteTaskList(list.id)" mat-fab class="my-6 mx-3">
+                        <mat-icon>delete</mat-icon>
+                      </button>
+                      <div class="task-list-item">
+                        <mat-icon (click)="renameTaskList(list.id)" class="mx-4">edit</mat-icon>
+                      </div>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    }
+</div>
+
+}
+@if(!authService.session){
+  <div class="flex justify-center items-center py-5">
+    <h1 class="text-3xl">Please login to view this page</h1>
+  </div>
+}

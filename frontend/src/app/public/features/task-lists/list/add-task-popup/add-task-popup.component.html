@@ -1,0 +1,80 @@
+<mat-dialog-content>
+  <form [formGroup]="form" class="space-y-4">
+
+    <!-- Task Name Input -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Task Name</mat-label>
+      <input 
+        matInput 
+        formControlName="title" 
+        class="w-full rounded" 
+        required 
+        placeholder="Enter task name" 
+      />
+      <mat-error *ngIf="form.get('title')?.hasError('required')">
+        Task Name is required
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Description Textarea -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Description</mat-label>
+      <textarea 
+        matInput 
+        formControlName="description" 
+        class="w-full rounded" 
+        placeholder="Enter description"
+      ></textarea>
+    </mat-form-field>
+
+    <!-- Deadline Date Picker -->
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Deadline</mat-label>
+      <input 
+        matInput 
+        [matDatepicker]="picker" 
+        formControlName="deadline" 
+        class="w-full rounded" 
+        required 
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      <mat-error *ngIf="form.get('deadline')?.hasError('required')">
+        Deadline is required
+      </mat-error>
+      <mat-error *ngIf="form.get('deadline')?.hasError('pastDate')">
+        Deadline must be a future date
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Custom Error Message (if any) -->
+    <div *ngIf="errorMessage" class="text-red-500">
+      {{ errorMessage }}
+    </div>
+
+  </form>
+</mat-dialog-content>
+
+<!-- Dialog Actions -->
+<div mat-dialog-actions class="flex justify-between items-center mt-4">
+  
+  <!-- Cancel Button -->
+  <button
+    mat-button
+    (click)="close()"
+    class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded"
+  >
+    Cancel
+  </button>
+  
+  <!-- Submit Button -->
+  <button
+    mat-button
+    (click)="submit()"
+    [disabled]="form.invalid"
+    class="hover:bg-gray-300 hover:text-white bg-blue-700 text-white font-semibold py-2 px-4 rounded"
+  >
+    Add
+  </button>
+
+</div>

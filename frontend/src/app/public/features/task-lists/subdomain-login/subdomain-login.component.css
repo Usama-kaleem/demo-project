@@ -1,0 +1,17 @@
+.dialog-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Ensures the wrapper takes full viewport height */
+  }
+  
+  .mat-dialog-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .bg-white {
+    max-width: 100%; /* Make sure the dialog does not exceed screen width */
+  }
+  

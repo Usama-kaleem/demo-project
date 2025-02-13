@@ -1,0 +1,51 @@
+@if(1){
+    <div>
+        <h1 style="text-align: center; font-size: 54px;">Tasks </h1>
+        <div style="display: flex; justify-content: center; align-items: center;">
+            <button (click)="openPopup()" style="background-color:blueviolet; color: aliceblue; padding: 10px; border: none; border-radius: 8px; font-size: 16px; transition: transform 0.3s ease;" class="hover:bg-violet-400 hover:scale-105 transition-colors duration-300">
+               Add New Task
+            </button>
+            <button (click)="addMember()" style="margin-left: 10px; background-color:blueviolet; color: aliceblue; padding: 10px; border: none; border-radius: 8px; font-size: 16px; transition: transform 0.3s ease;" class="hover:bg-violet-400 hover:scale-105 transition-colors duration-300">
+                Add New Member to task List
+             </button>
+        </div>
+        <div class="flex items-center justify-center py-5 space-x-5">
+            <h3>Filters</h3>
+            <mat-button-toggle-group
+              name="filters"
+              aria-label="Filters"
+              multiple
+              (change)="onFilterChange($event)">
+              <mat-button-toggle value="incomplete">Incomplete</mat-button-toggle>
+              <mat-button-toggle value="complete">Complete</mat-button-toggle>
+              <mat-button-toggle value="past-due">Past due</mat-button-toggle>
+            </mat-button-toggle-group>
+          </div>
+        @for (task of tasks; track task.id) {
+            <div class="grid place-items-center my-5">
+                <div class="bg-white rounded-lg shadow-2xl overflow-hidden w-1/4 ">
+                    <div class="p-6">
+                        <!-- here we will add the subdomain work as a routerlink ="(link)" video 17 : 29:00-->
+                        <div class="text-center text-xl font-semibold text-gray-800">{{task.title}}</div>
+                        <div class="text-center text-sm font-semibold text-gray-800">{{task.description}}</div><br>
+                        
+                        @if(task.status == 'completed') {
+                            <div style="display: flex; justify-content: center; align-items: center;">
+                                <button style="background-color:rgb(43, 226, 70); color: aliceblue; padding: 10px; border: none; border-radius: 8px; font-size: 16px; transition: transform 0.3s ease;" class="hover:bg-violet-400 hover:scale-105 transition-colors duration-300">
+                                    Completed
+                                </button>
+                            </div>
+                        } @else {
+                            <div class="text-center text-sm font-semibold text-gray-800">{{formatDeadline(task.deadline)}}</div><br>
+                            <div style="display: flex; justify-content: center; align-items: center;" >
+                                <button (click)="markAsCompleted(task.id)" style="background-color:rgb(226, 43, 43); color: aliceblue; padding: 10px; border: none; border-radius: 8px; font-size: 16px; transition: transform 0.3s ease;" class="hover:bg-violet-400 hover:scale-105 transition-colors duration-300">
+                                   Mark as Completed
+                                </button>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}

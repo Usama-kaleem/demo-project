@@ -1,0 +1,26 @@
+<h1 mat-dialog-title class="text-xl font-bold mb-4 text-center">Add New Task List</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" class="space-y-4">
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>Task List Name</mat-label>
+      <input matInput formControlName="taskListName" class="w-full rounded">
+      <mat-error *ngIf="form.get('taskListName')?.hasError('required')">
+        Task List Name is required
+      </mat-error>
+      <mat-error *ngIf="form.get('taskListName')?.hasError('taskListNameTaken')">
+        Task List Name is already taken
+      </mat-error>
+    </mat-form-field>
+    <div *ngIf="errorMessage" class="text-red-500">
+      {{ errorMessage }}
+    </div>
+  </form>
+</div>
+<div mat-dialog-actions class="flex justify-between items-center mt-4">
+  <button mat-flat-button color="warn" (click)="close()" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-2 px-4 rounded">
+    Cancel
+  </button>
+  <button mat-flat-button color="primary" (click)="submit()" [disabled]="form.invalid" class="font-semibold py-2 px-4 rounded">
+    Add
+  </button>
+</div>

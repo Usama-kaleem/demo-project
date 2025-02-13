@@ -1,0 +1,20 @@
+.card{
+    @apply bg-zinc-50 shadow-md rounded-lg px-8 pt-6 pb-8 mb-4 w-96;
+
+    label{
+        @apply block text-gray-700 text-sm font-bold mb-2;
+    }
+
+    input{
+        @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none mb-5;
+
+        &.ng-invalid.ng-touched{
+            @apply border-red-500;
+        }
+    }
+
+    button[type="submit"] {
+        @apply bg-[#8a2ce2] hover:bg-[#8a2ce299] text-white font-bold py-2 px-4 rounded focus:outline-none;
+    }
+    
+}
