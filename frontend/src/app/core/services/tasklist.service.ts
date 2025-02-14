@@ -59,6 +59,7 @@ export class TaskListService {
                 Authorization: `Bearer ${this.authService.session?.accessToken}`
             }
         });
+        
     }
 
     updateTaskList(taskListId: number, name: string) {

@@ -11,6 +11,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { tasksService } from '../../../../../core/services/tasks.service';
 import { ITasks } from '../../../../../core/interfaces/model/tasks.model.interface';
 import { ActivatedRoute } from '@angular/router';
+import moment from 'moment';
 
 export function futureDateValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -82,7 +83,10 @@ export class AddTaskPopupComponent {
       });
     }
   }
-
+  dateFilter = (d: Date | null): boolean => {
+    const today = moment().startOf('day');
+    return d ? moment(d).isSameOrAfter(today) : false;
+  }
   close() {
     this.dialogRef.close();
   }

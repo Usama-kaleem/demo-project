@@ -34,22 +34,22 @@ export class TaskListsComponent implements OnInit{
   ) 
   {
     this.loadTaskList()
-    console.log('TaskListsComponent.constructor');
-    
   }
 
   showPopup() {
     const dialogRef = this.dialog.open(AddTaskListDialogComponent);
     dialogRef.afterClosed().subscribe({
       next: (result) => {
-        console.log('Dialog Result:', result);
-        this.taskList.unshift(result);
-
-        //this.loadTaskList();
+        if(result){
+          console.log('Dialog Result:', result);
+          this.taskList.unshift(result);  
+        }
       },
     })
   }
+
   loadTaskList() {
+    console.log("load task list")
     //console.log('Loading Task List',localStorage.getItem('session'));
     this.taskListService.getTaskLists().subscribe((data: any) => {
       this.taskList = data;
@@ -57,20 +57,18 @@ export class TaskListsComponent implements OnInit{
   }
   
   ngOnInit(): void {
-    this.webSocketService.onMemberAdded((data) => {
-      if (data.userId === this.authService.getSession().user.id) {
-        this.message = `${data.name} has been assigned to you by ${this.authService.getSession().user.name}.`;
-      }
-    });
-    console.log('TaskListsComponent.ngOnInit');
-    //this.webSocketService.disconnect();
+    this.webSocketService.listen("member-added").subscribe((data: any) => {
+        if (data.userId === this.authService.getSession().user.id) {
+          this.message = `${data.name} has been assigned to you by ${this.authService.getSession().user.name}.`;
+        }
+      });
   }
 
   deleteTaskList(taskListId: number) {
     this.taskListService.deleteTaskList(taskListId).subscribe({
       next: (response) => {
+        this.taskList = this.taskList.filter(taskList => taskList.id !== taskListId);
         console.log('Task List Deleted:', response);
-        this.loadTaskList();
       },
     });
   }
@@ -88,7 +86,11 @@ export class TaskListsComponent implements OnInit{
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loadTaskList();
+        console.log('Task List Renamed:', result.name);
+        const taskList = this.taskList.find(taskList => taskList.id === taskListId);
+        if (taskList) {
+          taskList.name = result.name; 
+        }
       }
     });
   }
@@ -103,6 +105,7 @@ export class TaskListsComponent implements OnInit{
       }
     });
   }
+
   ngOnDestroy(): void {
     this.webSocketService.disconnect();
   }

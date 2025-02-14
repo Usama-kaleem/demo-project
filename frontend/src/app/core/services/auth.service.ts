@@ -29,7 +29,6 @@ export class AuthService {
   router = inject(Router);
   session?: Session;
   constructor() {
-    console.log('AuthService.constructor');
     let session = localStorage.getItem('session');
     if (session) {
       session = JSON.parse(session);
