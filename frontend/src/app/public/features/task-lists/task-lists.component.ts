@@ -47,9 +47,7 @@ export class TaskListsComponent implements OnInit{
       },
     })
   }
-
   loadTaskList() {
-    console.log("load task list")
     //console.log('Loading Task List',localStorage.getItem('session'));
     this.taskListService.getTaskLists().subscribe((data: any) => {
       this.taskList = data;
@@ -57,11 +55,11 @@ export class TaskListsComponent implements OnInit{
   }
   
   ngOnInit(): void {
-    this.webSocketService.listen("member-added").subscribe((data: any) => {
-        if (data.userId === this.authService.getSession().user.id) {
-          this.message = `${data.name} has been assigned to you by ${this.authService.getSession().user.name}.`;
-        }
-      });
+    this.webSocketService.listen(`user-${this.authService.getSession().user.id}`).subscribe((data: any) => {
+      this.message = `${data.name} has been assigned to you by ${this.authService.getSession().user.name}.`;
+      this.taskList.unshift(data.tasklist);
+    });
+    
   }
 
   deleteTaskList(taskListId: number) {
@@ -105,7 +103,6 @@ export class TaskListsComponent implements OnInit{
       }
     });
   }
-
   ngOnDestroy(): void {
     this.webSocketService.disconnect();
   }

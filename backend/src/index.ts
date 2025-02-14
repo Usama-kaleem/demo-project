@@ -20,6 +20,10 @@ const io = socketIo(server, {
 io.on('connection', (socket: any) => {
   console.log('New client connected');
 
+  socket.on('join-room', (userId: any) => {
+    socket.join(`user-${userId}`);
+  });
+  
   socket.on('disconnect', () => {
     console.log('Client disconnected');
   });

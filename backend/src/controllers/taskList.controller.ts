@@ -6,6 +6,7 @@ import { User } from "../models/User";
 import { TaskList } from "../models/TaskList";
 import { io } from "..";
 import { UserTaskList } from "../models/UserTaskList";
+import { get } from "http";
 
 export const gettaskListController = async (req: Request, res: Response) => {
 
@@ -148,8 +149,9 @@ export const addMemberToTaskListController = async (req: Request, res: Response)
     const addMember = await addTaskListToUser(parseInt(userId), parseInt(taskListId));
     const tasklistname = await TaskList.findByPk(parseInt(taskListId));
     const name = tasklistname?.get('name')
+    const tasklist = await gettaskListById(parseInt(taskListId));
 
-    io.emit('member-added', { userId, name });
+    io.to(`user-${userId}`).emit(`user-${userId}`, { userId, name, tasklist });
 
     res.json({addMember ,message: 'User added to task list'});
 }

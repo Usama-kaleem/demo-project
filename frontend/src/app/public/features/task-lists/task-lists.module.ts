@@ -17,3 +17,10 @@ import { AddTaskListDialogComponent } from './add-task-list-dialog/add-task-list
   ]
 })
 export class TaskListsModule { }
+
+
+// this.webSocketService.listen("member-added").subscribe((data: any) => {
+//   if (data.userId === this.authService.getSession().user.id) {
+//     this.message = `${data.name} has been assigned to you by ${this.authService.getSession().user.name}.`;
+//   }
+// });

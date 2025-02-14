@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { io, Socket } from 'socket.io-client';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,10 @@ export class SocketService {
   private socket: Socket;
   socketSubject: Subject<any> = new Subject<any>();
 
-  constructor() {
+  constructor(private authService: AuthService) {
     this.socket = io(this.uri);
+    const userId = this.authService.getSession().user.id;
+    this.socket.emit('join-room', userId);
   }
 
   listen(eventName: string) {
