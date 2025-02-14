@@ -43,7 +43,9 @@ export class TaskListsComponent implements OnInit{
     dialogRef.afterClosed().subscribe({
       next: (result) => {
         console.log('Dialog Result:', result);
-        this.loadTaskList();
+        this.taskList.unshift(result);
+
+        //this.loadTaskList();
       },
     })
   }

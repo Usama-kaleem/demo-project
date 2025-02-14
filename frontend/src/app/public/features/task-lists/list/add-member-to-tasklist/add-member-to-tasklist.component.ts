@@ -32,7 +32,7 @@ export class AddMemberToTaskListComponent implements OnInit{
     private dialogRef: MatDialogRef<AddMemberToTaskListComponent>,
     private taskListService: TaskListService,
     private authService: AuthService,
-    private webSocketService: SocketService, // Inject the WebSocketService
+    
     private snackBar: MatSnackBar, 
     @Inject(MAT_DIALOG_DATA) public data: { taskListId: string }
   ) {

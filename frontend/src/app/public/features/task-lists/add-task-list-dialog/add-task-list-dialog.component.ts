@@ -61,7 +61,7 @@ export class AddTaskListDialogComponent {
       this.taskListService.addTaskList(this.form.value.taskListName).subscribe({
         next: (response) => {
           console.log('Task List Added:', response);
-          this.dialogRef.close(this.form.value);
+          this.dialogRef.close(response);
         },
         error: (error) => {
           console.error('Error adding task list:', error);

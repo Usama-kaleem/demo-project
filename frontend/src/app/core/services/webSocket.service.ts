@@ -6,7 +6,7 @@ import { io, Socket } from 'socket.io-client';
   providedIn: 'root'
 })
 export class SocketService {
-  [x: string]: any;
+  //[x: string]: any;
   readonly uri: string = "ws://localhost:3000";
   private socket: Socket;
 
@@ -25,7 +25,7 @@ export class SocketService {
   onMemberAdded(callback: (data: any) => void): void {
     this.socket.on('member-added', callback);
   }
-  
+
   disconnect(): void {
     if (this.socket) {
       this.socket.disconnect();
